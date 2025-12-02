@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+      <h1>Expense Tracker</h1>
+
+      <!-- Balance Section -->
+      <div class="balance-box">
+          <h2>Balance</h2>
+          <p id="balanceAmount">KES 0</p>
+      </div>
+
+      <!-- Income + Expense Summary -->
+      <div class="summary">
+          <div class="summary-card income">
+              <h3>Income</h3>
+              <p id="incomeAmount">KES 0</p>
+          </div>
+
+          <div class="summary-card expense">
+              <h3>Expense</h3>
+              <p id="expenseAmount">KES 0</p>
+          </div>
+      </div>
+
+      <!-- Add Transaction Section -->
+      <div class="input-section">
+          <input type="text" id="descInput" placeholder="Description">
+          <input type="number" id="amountInput" placeholder="Amount">
+
+          <select id="typeSelect">
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+          </select>
+
+          <select id="categorySelect">
+              <option value="General">General</option>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Rent">Rent</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Salary">Salary</option>
+              <option value="Utilities">Utilities</option>
+          </select>
+
+          <button id="addBtn">Add</button>
+      </div>
+
+      <!-- Transactions List -->
+      <ul id="transactionList"></ul>
+
+      <!-- Clear All -->
+      <button id="clearAllBtn" class="clear-btn">Clear All</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
