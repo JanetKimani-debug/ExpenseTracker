@@ -15,6 +15,9 @@ const clearAllBtn = document.getElementById("clearAllBtn");
 let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 render();
 
+// Budget storage
+let monthlyBudget = JSON.parse(localStorage.getItem("monthlyBudget")) || 0;
+
 addBtn.addEventListener("click", () => {
     const desc = descInput.value.trim();
     const amount = Number(amountInput.value);
@@ -77,13 +80,101 @@ function render() {
     });
 
     incomeAmount.textContent = `KES ${totalIncome}`;
-    expenseAmount.textContent = `KES ${totalExpense}`;
-    balanceAmount.textContent = `KES ${totalIncome - totalExpense}`;
+expenseAmount.textContent = `KES ${totalExpense}`;
+balanceAmount.textContent = `KES ${totalIncome - totalExpense}`;
+
+// 🔥 Add this line
+checkBudgetWarnings(totalExpense);
+
 }
 
 function save() {
     localStorage.setItem("transactions", JSON.stringify(transactions));
 }
+// Set Monthly Budget
+document.getElementById("setMonthlyBudgetBtn").addEventListener("click", () => {
+    const value = Number(document.getElementById("monthlyBudgetInput").value);
+
+    if (value <= 0) return alert("Enter a valid monthly budget!");
+
+    monthlyBudget = value;
+    localStorage.setItem("monthlyBudget", JSON.stringify(monthlyBudget));
+
+    renderBudgets();
+});
+function checkBudgetWarnings(totalExpense) {
+    const warningBox = document.getElementById("budgetWarning");
+
+    // MONTHLY budget warning
+    if (monthlyBudget > 0 && totalExpense > monthlyBudget) {
+        warningBox.textContent = "⚠️ You have exceeded your monthly budget!";
+        warningBox.style.color = "red";
+    } else {
+        warningBox.textContent = "";
+    }
+
+    // CATEGORY LIMITS — SUM expenses per category
+    const categoryTotals = {};
+
+    transactions.forEach(t => {
+        if (t.type === "expense") {
+            categoryTotals[t.category] = (categoryTotals[t.category] || 0) + t.amount;
+        }
+    });
+
+    for (const cat in categoryLimits) {
+        if (categoryTotals[cat] && categoryTotals[cat] > categoryLimits[cat]) {
+            alert(`⚠️ You have exceeded the limit for ${cat} category!`);
+        }
+    }
+}
+
+
+    // Category limits
+    transactions
+        .filter(t => t.type === "expense")
+        .forEach(t => {
+            if (categoryLimits[t.category] && t.amount > categoryLimits[t.category]) {
+                alert(`⚠️ Category limit exceeded for ${t.category}!`);
+            }
+        });
+}
+
+
+document.getElementById("setCategoryLimitBtn").addEventListener("click", () => {
+    const category = document.getElementById("limitCategorySelect").value;
+    const value = Number(document.getElementById("categoryLimitInput").value);
+
+    if (value <= 0) return alert("Enter a valid limit!");
+
+    categoryLimits[category] = value;
+    localStorage.setItem("categoryLimits", JSON.stringify(categoryLimits));
+
+    renderBudgets();
+});
+function renderBudgets() {
+    const box = document.getElementById("limitsList");
+    box.innerHTML = "";
+
+    const monthly = document.createElement("p");
+    monthly.innerHTML = `<strong>Monthly Budget:</strong> KES ${monthlyBudget}`;
+    box.appendChild(monthly);
+
+    const catTitle = document.createElement("h4");
+    catTitle.textContent = "Category Limits:";
+    box.appendChild(catTitle);
+
+    for (const c in categoryLimits) {
+        const item = document.createElement("p");
+        item.textContent = `${c}: KES ${categoryLimits[c]}`;
+        box.appendChild(item);
+    }
+}
+
+// Budget storage
+let monthlyBudget = JSON.parse(localStorage.getItem("monthlyBudget")) || 0;
+let categoryLimits = JSON.parse(localStorage.getItem("categoryLimits")) || {};
+
 
 // Clear all
 clearAllBtn.addEventListener("click", () => {
@@ -93,3 +184,4 @@ clearAllBtn.addEventListener("click", () => {
         render();
     }
 });
+
