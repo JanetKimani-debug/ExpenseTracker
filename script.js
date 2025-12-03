@@ -93,7 +93,3 @@ clearAllBtn.addEventListener("click", () => {
         render();
     }
 });
-
-
-
-
