@@ -41,6 +41,27 @@ h1 { text-align: center; margin: 6px 0 18px; }
 .summary-card p { margin:0; font-weight:700; font-size:18px; }
 .summary-card.income p{ color:green; } .summary-card.expense p{ color:red; }
 
+/* CHART CARD FIX */
+.chart-card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin: 20px 0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* FIX HEIGHT — prevents browser from freezing */
+.chart-card canvas {
+  width: 100% !important;
+  max-height: 260px !important; /* <- Safest size */
+  display: block;
+}
+
+
 /* Input grid */
 .input-section {
   display:grid;
@@ -89,5 +110,6 @@ h1 { text-align: center; margin: 6px 0 18px; }
   .input-section { grid-template-columns: 1fr 1fr 1fr; grid-auto-rows:auto; }
   .charts { flex-direction:column; }
 }
+
 
 
