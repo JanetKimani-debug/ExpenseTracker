@@ -1,106 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Expense Tracker — Charts & Budgets</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <div class="container">
-    <h1>Expense Tracker</h1>
+      <h1>Expense Tracker</h1>
 
-    <!-- Balance Section -->
-    <div class="balance-box">
-      <h2>Balance</h2>
-      <p id="balanceAmount">KES 0</p>
-      <small id="budgetWarning" class="warning"></small>
-    </div>
-
-    <!-- Income + Expense Summary -->
-    <div class="summary">
-      <div class="summary-card income">
-        <h3>Income</h3>
-        <p id="incomeAmount">KES 0</p>
+      <!-- Balance Section -->
+      <div class="balance-box">
+          <h2>Balance</h2>
+          <p id="balanceAmount">KES 0</p>
       </div>
 
-      <div class="summary-card expense">
-        <h3>Expense</h3>
-        <p id="expenseAmount">KES 0</p>
-      </div>
-    </div>
+      <!-- Income + Expense Summary -->
+      <div class="summary">
+          <div class="summary-card income">
+              <h3>Income</h3>
+              <p id="incomeAmount">KES 0</p>
+          </div>
 
-    <!-- Add Transaction Section -->
-    <div class="input-section">
-      <input type="text" id="descInput" placeholder="Description" />
-      <input type="number" id="amountInput" placeholder="Amount" />
-      <select id="typeSelect">
-        <option value="income">Income</option>
-        <option value="expense">Expense</option>
-      </select>
-      <select id="categorySelect">
-        <option value="General">General</option>
-        <option value="Food">Food</option>
-        <option value="Transport">Transport</option>
-        <option value="Rent">Rent</option>
-        <option value="Shopping">Shopping</option>
-        <option value="Salary">Salary</option>
-        <option value="Utilities">Utilities</option>
-      </select>
-      <!-- Date (defaults to today) -->
-      <input type="date" id="dateInput" />
-      <button id="addBtn">Add</button>
-    </div>
-
-    <!-- Budget controls -->
-    <div class="budget-section">
-      <div class="budget-row">
-        <label>Monthly Budget (KES):</label>
-        <input type="number" id="monthlyBudgetInput" placeholder="Overall budget" />
-        <button id="setMonthlyBudgetBtn">Set</button>
+          <div class="summary-card expense">
+              <h3>Expense</h3>
+              <p id="expenseAmount">KES 0</p>
+          </div>
       </div>
 
-      <div class="budget-row">
-        <label>Per-category limit:</label>
-        <select id="limitCategorySelect">
-          <option value="Food">Food</option>
-          <option value="Transport">Transport</option>
-          <option value="Rent">Rent</option>
-          <option value="Shopping">Shopping</option>
-          <option value="Utilities">Utilities</option>
-          <option value="General">General</option>
-        </select>
-        <input type="number" id="categoryLimitInput" placeholder="Limit KES" />
-        <button id="setCategoryLimitBtn">Set</button>
+      <!-- Add Transaction Section -->
+      <div class="input-section">
+          <input type="text" id="descInput" placeholder="Description">
+          <input type="number" id="amountInput" placeholder="Amount">
+
+          <select id="typeSelect">
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+          </select>
+
+          <select id="categorySelect">
+              <option value="General">General</option>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Rent">Rent</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Salary">Salary</option>
+              <option value="Utilities">Utilities</option>
+          </select>
+
+          <button id="addBtn">Add</button>
       </div>
 
-      <div id="limitsList"></div>
-    </div>
+      <!-- Transactions List -->
+      <ul id="transactionList"></ul>
 
-    <!-- Charts -->
-    <div class="charts">
-      <div class="chart-card">
-        <h4>Monthly summary (last 6 months)</h4>
-        <canvas id="monthlyChart" height="160"></canvas>
-      </div>
-
-      <div class="chart-card">
-        <h4>Expense by Category (pie)</h4>
-        <canvas id="categoryPie" height="160"></canvas>
-      </div>
-    </div>
-
-    <!-- Transactions List -->
-    <ul id="transactionList"></ul>
-
-    <!-- Clear All -->
-    <button id="clearAllBtn" class="clear-btn">Clear All</button>
+      <!-- Clear All -->
+      <button id="clearAllBtn" class="clear-btn">Clear All</button>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
+
 
 
