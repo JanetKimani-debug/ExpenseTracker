@@ -177,6 +177,14 @@ function renderCharts() {
       ]
     },
     options: { responsive:true, maintainAspectRatio:false }
+
+    options: {
+    maintainAspectRatio: false,
+    responsive: true,
+    animation: {
+        duration: 400   // or set to 0 for max performance
+    }
+}
   });
 
   // Pie chart by category (expenses only)
@@ -198,6 +206,13 @@ function renderCharts() {
     },
     options: { responsive:true, maintainAspectRatio:false }
   });
+options: {
+    maintainAspectRatio: false,
+    responsive: true,
+    animation: {
+        duration: 400   // or set to 0 for max performance
+    }
+}
 }
 
 // Utilities: last N months keys
@@ -301,4 +316,5 @@ clearAllBtn.addEventListener("click", () => {
 function formatKES(n) {
   return `KES ${n}`;
 }
+
 
